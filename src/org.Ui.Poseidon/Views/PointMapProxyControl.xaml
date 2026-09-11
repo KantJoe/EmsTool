@@ -1,0 +1,84 @@
+﻿<UserControl
+    x:Class="org.Ui.Poseidon.Views.PointMapProxyControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:lang="clr-namespace:org.Ui.MultiLanguage;assembly=org.Ui"
+    xmlns:local="clr-namespace:org.Ui.Poseidon.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:org.Ui.Poseidon.ViewModels"
+    d:DesignHeight="758"
+    d:DesignWidth="1088"
+    DataContextChanged="UserControl_DataContextChanged"
+    Loaded="UserControl_Loaded"
+    mc:Ignorable="d">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel
+            Margin="20,10,10,10"
+            HorizontalAlignment="Left"
+            Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="240" />
+                    <ColumnDefinition Width="240" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <materialDesign:Card Grid.Row="0" Grid.Column="0">
+                    <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
+                        <MenuItem Header="{Binding 导入, Source={x:Static lang:MultiLang.Instance}}">
+                            <MenuItem Command="{Binding ImportPointMap_FunctionCode_03_Command}" Header="{Binding 点位表_导入功能码3, Source={x:Static lang:MultiLang.Instance}}" />
+                            <MenuItem Command="{Binding ImportPointMap_FunctionCode_04_Command}" Header="{Binding 点位表_导入功能码4, Source={x:Static lang:MultiLang.Instance}}" />
+                        </MenuItem>
+                        <MenuItem Header="{Binding 导出, Source={x:Static lang:MultiLang.Instance}}">
+                            <MenuItem Header="{Binding 点位表_导出功能码3, Source={x:Static lang:MultiLang.Instance}}" />
+                            <MenuItem Header="{Binding 点位表_导出功能码4, Source={x:Static lang:MultiLang.Instance}}" />
+                        </MenuItem>
+                        <MenuItem Header="{Binding 其它, Source={x:Static lang:MultiLang.Instance}}">
+                            <MenuItem Header="{Binding 点位表_清空功能码3, Source={x:Static lang:MultiLang.Instance}}" />
+                            <MenuItem Header="{Binding 点位表_清空功能码4, Source={x:Static lang:MultiLang.Instance}}" />
+                        </MenuItem>
+                    </Menu>
+                </materialDesign:Card>
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding 点位表_单表, Source={x:Static lang:MultiLang.Instance}}" />
+                    <ToggleButton
+                        Name="BtnViewSwitch"
+                        IsChecked="{Binding MultipleGroups}"
+                        IsHitTestVisible="False"
+                        Style="{StaticResource MaterialDesignSwitchToggleButton}">
+                        <Behaviors:Interaction.Triggers>
+                            <Behaviors:EventTrigger EventName="Unchecked">
+                                <Behaviors:InvokeCommandAction Command="{Binding ViewSwitchCommand, IsAsync=True}" />
+                            </Behaviors:EventTrigger>
+                            <Behaviors:EventTrigger EventName="Checked">
+                                <Behaviors:InvokeCommandAction Command="{Binding ViewSwitchCommand, IsAsync=True}" />
+                            </Behaviors:EventTrigger>
+                        </Behaviors:Interaction.Triggers>
+                    </ToggleButton>
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding 点位表_分组, Source={x:Static lang:MultiLang.Instance}}" />
+                </StackPanel>
+            </Grid>
+
+            <ContentControl Content="{Binding Content, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

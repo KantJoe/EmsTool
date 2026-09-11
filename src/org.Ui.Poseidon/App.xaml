@@ -1,0 +1,34 @@
+﻿<Application
+    x:Class="org.Ui.Poseidon.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:org.Ui.Converters;assembly=org.Ui"
+    xmlns:local="clr-namespace:org.Ui.Poseidon"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:selectors="clr-namespace:org.Ui.Selectors;assembly=org.Ui"
+    Startup="Application_Startup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/org.Ui;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/org.Ui;component/Themes/Energies.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BitmapImage x:Key="MainIcon" UriSource="pack://application:,,,/Resources/Images/favicon.ico" />
+            <converters:DictionaryConverter x:Key="DictionaryConvert" />
+            <converters:PriviledgeVisibleConverter x:Key="PriviledgeConvert" />
+            <LinearGradientBrush x:Key="TitleBrush" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Offset="0.06" Color="#56C500" />
+                <GradientStop Offset="0.14" Color="#54C405" />
+                <GradientStop Offset="0.23" Color="#4FC416" />
+                <GradientStop Offset="0.33" Color="#46C331" />
+                <GradientStop Offset="0.43" Color="#3BC357" />
+                <GradientStop Offset="0.45" Color="#2CC286" />
+                <GradientStop Offset="0.51" Color="#2AC28F" />
+                <GradientStop Offset="0.58" Color="#1DBDAD" />
+                <GradientStop Offset="0.66" Color="#12B8C8" />
+                <GradientStop Offset="0.74" Color="#0AB5DC" />
+                <GradientStop Offset="1" Color="#04B2EB" />
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

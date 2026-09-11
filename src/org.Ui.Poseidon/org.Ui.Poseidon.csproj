@@ -1,0 +1,121 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<AssemblyName>Poseidon Ems</AssemblyName>
+		<Platforms>AnyCPU;x64</Platforms>
+		<InvariantGlobalization>false</InvariantGlobalization>
+		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+		<ApplicationManifest></ApplicationManifest>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="favicon.ico" />
+		<None Remove="Resources\Images\acdc-load.png" />
+		<None Remove="Resources\Images\battery.png" />
+		<None Remove="Resources\Images\BF100.png" />
+		<None Remove="Resources\Images\BF200.png" />
+		<None Remove="Resources\Images\BF200DC.png" />
+		<None Remove="Resources\Images\building.png" />
+		<None Remove="Resources\Images\dcdc.png" />
+		<None Remove="Resources\Images\diagnostics-solar-panel.png" />
+		<None Remove="Resources\Images\enapter-solar-panel.png" />
+		<None Remove="Resources\Images\favicon.ico" />
+		<None Remove="Resources\Images\generator.png" />
+		<None Remove="Resources\Images\home.jpg" />
+		<None Remove="Resources\Images\inverter.png" />
+		<None Remove="Resources\Images\load.png" />
+		<None Remove="Resources\Images\mobile-generator.png" />
+		<None Remove="Resources\Images\pcs.png" />
+		<None Remove="Resources\Images\power-grid.png" />
+		<None Remove="Resources\Images\redidential-load.png" />
+		<None Remove="Resources\Images\solar-panel.png" />
+		<None Remove="Resources\Images\STACK100.png" />
+		<None Remove="Resources\Images\STACK280.png" />
+		<None Remove="Resources\Images\vector.png" />
+		<None Remove="Resources\Others\ProductModels.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Resources\Others\ProductModels.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Configs\appSettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\MultiLangs\de.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\MultiLangs\en.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\MultiLangs\es.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\MultiLangs\fr.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\MultiLangs\it.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\MultiLangs\zh-hans.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\MultiLangs\zh-hant.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\Priviledges\accountRoles.json">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\Priviledges\appRoles.json">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\Priviledges\loginAccounts.json">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Models\" />
+		<Folder Include="Resources\Images\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\org.DomainService\org.DomainService.Firmware\org.DomainService.Firmware.csproj" />
+	  <ProjectReference Include="..\libraries\org.DataAccess\org.DataAccess.csproj" />
+	  <ProjectReference Include="..\libraries\org.Privilege\org.Privilege.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="TouchSocket.Modbus">
+	    <HintPath>..\..\libs\TouchSocket\TouchSocket.Modbus.dll</HintPath>
+	  </Reference>
+	  <Reference Include="TouchSocket.Mqtt">
+	    <HintPath>..\..\libs\TouchSocket\TouchSocket.Mqtt.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+</Project>

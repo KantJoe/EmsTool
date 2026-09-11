@@ -1,0 +1,249 @@
+﻿<UserControl
+    x:Class="org.Product01.Views.EnergyMovingOfProduct01Control"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:Figures="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:convert="clr-namespace:org.Ui.Converters;assembly=org.Ui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lang="clr-namespace:org.Ui.MultiLanguage;assembly=org.Ui"
+    xmlns:local="clr-namespace:org.Ui.Views;assembly=org.Ui"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valid="clr-namespace:org.Ui.ValidationRules;assembly=org.Ui"
+    xmlns:vm="clr-namespace:org.Product01.ViewModels"
+    Width="1248"
+    Height="360">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/org.Ui;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="/org.Ui;component/Themes/Energies.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <materialDesign:Card
+        Margin="0,10,0,0"
+        materialDesign:ElevationAssist.Elevation="Dp16"
+        IsHitTestVisible="False">
+        <Canvas Name="CanEnergy">
+            <Path
+                x:Name="Psolarpanel"
+                Canvas.Left="250"
+                Canvas.Top="25"
+                Stroke="{Binding Message.AcPvState, Converter={x:Static convert:BooleanToBrushConverter.White}, FallbackValue=DimGray}"
+                Style="{StaticResource SolarPanel}" />
+            <Polyline Points="300 50 410 50 410 155" Style="{StaticResource LineBackgroud}" />
+            <Polyline
+                Points="300 50 410 50 410 155"
+                Style="{StaticResource LineForcegroud}"
+                Visibility="{Binding Message.AcPvState, Converter={x:Static materialDesignConverters:BooleanToVisibilityConverter.CollapsedInstance}}">
+                <Polyline.Triggers>
+                    <EventTrigger RoutedEvent="Polyline.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource OnewayStory}" />
+                    </EventTrigger>
+                </Polyline.Triggers>
+            </Polyline>
+
+
+            <Path
+                x:Name="PGrid"
+                Canvas.Left="250"
+                Canvas.Top="150"
+                Stroke="{Binding Message.GridState, Converter={x:Static convert:BooleanToBrushConverter.White}, FallbackValue=DimGray}"
+                Style="{StaticResource PowerGrid}" />
+            <Polyline Points="300 175 390 175" Style="{StaticResource LineBackgroud}" />
+            <Polyline
+                Points="300 175 390 175"
+                Style="{StaticResource LineForcegroud}"
+                Visibility="{Binding Message.GridState, Converter={x:Static materialDesignConverters:BooleanToVisibilityConverter.CollapsedInstance}}">
+                <Polyline.Triggers>
+                    <EventTrigger RoutedEvent="Polyline.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource OnewayStory}" />
+                    </EventTrigger>
+                </Polyline.Triggers>
+            </Polyline>
+
+            <Path
+                x:Name="PLoad"
+                Canvas.Left="250"
+                Canvas.Top="275"
+                Stroke="{Binding Message.LoadState, Converter={x:Static convert:BooleanToBrushConverter.White}, FallbackValue=DimGray}"
+                Style="{StaticResource Load}" />
+            <Polyline Points="410 190 410 300 300 300" Style="{StaticResource LineBackgroud}" />
+            <Polyline
+                Points="410 190 410 300 300 300"
+                Style="{StaticResource LineForcegroud}"
+                Visibility="{Binding Message.LoadState, Converter={x:Static materialDesignConverters:BooleanToVisibilityConverter.CollapsedInstance}}">
+                <Polyline.Triggers>
+                    <EventTrigger RoutedEvent="Polyline.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource OnewayStory}" />
+                    </EventTrigger>
+                </Polyline.Triggers>
+            </Polyline>
+
+            <ProgressBar
+                Canvas.Left="400"
+                Canvas.Top="165"
+                IsIndeterminate="True"
+                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                Value="0" />
+
+
+            <Path
+                x:Name="PBattery"
+                Canvas.Left="500"
+                Canvas.Top="25"
+                Stroke="{Binding Message.BatteryState, Converter={x:Static convert:BooleanToBrushConverter.White}, FallbackValue=DimGray}"
+                Style="{StaticResource Battery}" />
+            <Polyline Points="500 50 475 50 475 165 420 165" Style="{StaticResource LineBackgroud}" />
+            <Polyline
+                Points="500 50 475 50 475 165 420 165"
+                Style="{StaticResource LineForcegroud}"
+                Visibility="{Binding Message.BatteryState, Converter={x:Static materialDesignConverters:BooleanToVisibilityConverter.CollapsedInstance}}">
+                <Polyline.Triggers>
+                    <EventTrigger RoutedEvent="Polyline.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource OnewayStory}" />
+                    </EventTrigger>
+                </Polyline.Triggers>
+            </Polyline>
+
+            <Grid
+                Canvas.Left="100"
+                Canvas.Top="25"
+                Width="150"
+                Height="30"
+                VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65*" />
+                    <ColumnDefinition Width="35*" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="交流光伏: " />
+
+                <TextBlock
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Message.AcpvPower, FallbackValue=0}" />
+                <TextBlock
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    Text=" kW" />
+            </Grid>
+            <Grid
+                Canvas.Left="100"
+                Canvas.Top="150"
+                Width="150"
+                Height="30"
+                VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65*" />
+                    <ColumnDefinition Width="35*" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="电网: " />
+
+                <TextBlock
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Message.GridPower, FallbackValue=0}" />
+                <TextBlock
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    Text=" kW" />
+            </Grid>
+            <Grid
+                Canvas.Left="100"
+                Canvas.Top="275"
+                Width="150"
+                Height="30"
+                VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65*" />
+                    <ColumnDefinition Width="35*" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="负载: " />
+
+                <TextBlock
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Message.LoadPower, FallbackValue=0}" />
+                <TextBlock
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    Text=" kW" />
+            </Grid>
+            <Grid
+                Canvas.Left="575"
+                Canvas.Top="25"
+                VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Text="型号: " />
+
+                <TextBlock
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    HorizontalAlignment="Left"
+                    Text="{Binding Message.Battery1SN, FallbackValue=61040124100002404240001}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    Text="SOC: " />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Message.Battery1_Soc, FallbackValue=100}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    Text=" %" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    Text="充电功率: " />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Message.Battery1_ChargePower, FallbackValue=0}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    Text=" kW" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    Text="放电功率: " />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Message.Battery1_DischargePower, FallbackValue=0}" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    Text=" kW" />
+            </Grid>
+        </Canvas>
+    </materialDesign:Card>
+</UserControl>

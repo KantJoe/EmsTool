@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:converters="clr-namespace:org.Ui.Converters"
+    xmlns:lang="clr-namespace:org.Ui.MultiLanguage"
+    xmlns:local="clr-namespace:org.Ui.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:models="clr-namespace:org.Models;assembly=org.Models"
+    xmlns:selectors="clr-namespace:org.Ui.Selectors">
+    <ResourceDictionary.MergedDictionaries>
+        <materialDesign:BundledTheme
+            BaseTheme="Dark"
+            PrimaryColor="LightGreen"
+            SecondaryColor="Cyan" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

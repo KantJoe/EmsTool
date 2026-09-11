@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "admin",
+    "Name": "admin"
+  },
+  {
+    "Id": "Operator",
+    "Name": "Operator"
+  },
+  {
+    "Id": "Maintainer",
+    "Name": "Maintainer"
+  },
+  {
+    "Id": "Installer",
+    "Name": "Installer"
+  }
+]

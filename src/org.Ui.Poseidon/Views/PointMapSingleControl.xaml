@@ -1,0 +1,50 @@
+﻿<UserControl
+    x:Class="org.Ui.Poseidon.Views.PointMapSingleControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:org.Ui.Poseidon.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="758"
+    d:DesignWidth="1056"
+    Loaded="UserControl_Loaded"
+    mc:Ignorable="d">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="0,10,10,10" Orientation="Vertical">
+            <ListView
+                ItemsSource="{Binding Points}"
+                SelectedItem="{Binding SelectedPoint}"
+                VirtualizingPanel.CacheLength="{Binding CacheLength}"
+                VirtualizingPanel.CacheLengthUnit="Item"
+                VirtualizingPanel.IsVirtualizing="True"
+                VirtualizingPanel.VirtualizationMode="Recycling">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding FunctionCode}" Header="FunctionCode" />
+                        <GridViewColumn DisplayMemberBinding="{Binding GroupName}" Header="GroupName" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Address}" Header="Address" />
+                        <GridViewColumn
+                            Width="240"
+                            DisplayMemberBinding="{Binding Description}"
+                            Header="Description" />
+
+                        <GridViewColumn DisplayMemberBinding="{Binding DataType}" Header="DataType" />
+
+                        <GridViewColumn DisplayMemberBinding="{Binding BitsLength}" Header="BitsLength" />
+
+                        <GridViewColumn DisplayMemberBinding="{Binding Kind}" Header="Kind" />
+                        <GridViewColumn DisplayMemberBinding="{Binding ActualValue}" Header="ActualValue" />
+                        <GridViewColumn Header="Options">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="编辑" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

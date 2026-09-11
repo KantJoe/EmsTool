@@ -1,0 +1,52 @@
+﻿<UserControl
+    x:Class="org.Ui.Poseidon.Views.PointMapManagerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:org.Ui.Poseidon.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:org.Ui.Poseidon.ViewModels"
+    d:DesignHeight="758"
+    d:DesignWidth="1248"
+    Loaded="UserControl_Loaded"
+    mc:Ignorable="d">
+    <TabControl
+        Name="TbMain"
+        materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+        materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+        ItemsSource="{Binding Items}"
+        Loaded="TbMain_Loaded"
+        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+        SelectedItem="{Binding SelectedItem}"
+        SelectionChanged="TbMain_SelectionChanged"
+        Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+        TabStripPlacement="Left"
+        VirtualizingPanel.CacheLength="1"
+        VirtualizingPanel.CacheLengthUnit="Item"
+        VirtualizingPanel.IsContainerVirtualizable="True"
+        VirtualizingPanel.IsVirtualizing="True"
+        VirtualizingPanel.ScrollUnit="Item"
+        VirtualizingPanel.VirtualizationMode="Recycling">
+        <TabControl.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Width="auto" Height="auto">
+                    <materialDesign:PackIcon
+                        Width="24"
+                        Height="24"
+                        HorizontalAlignment="Center"
+                        Kind="LinkEdit" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Text="{Binding Alias}"
+                        ToolTip="{Binding Alias}" />
+                </StackPanel>
+            </DataTemplate>
+        </TabControl.ItemTemplate>
+        <TabControl.ContentTemplate>
+            <DataTemplate>
+                <local:PointMapProxyControl x:Name="proxy" DataContext="{Binding}" />
+            </DataTemplate>
+        </TabControl.ContentTemplate>
+    </TabControl>
+</UserControl>

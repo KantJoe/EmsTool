@@ -1,0 +1,140 @@
+﻿<UserControl
+    x:Class="org.Privilege.Views.AppendAccountControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lang="clr-namespace:org.Ui.MultiLanguage;assembly=org.Ui"
+    xmlns:local="clr-namespace:org.Privilege.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valid="clr-namespace:org.Ui.ValidationRules;assembly=org.Ui"
+    Width="280"
+    Height="500"
+    TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
+    mc:Ignorable="d">
+
+    <materialDesign:Card materialDesign:ElevationAssist.Elevation="Dp8">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock
+                    Name="TbTitle"
+                    Grid.Column="1"
+                    Width="130"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="LightGray"
+                    Style="{StaticResource MaterialDesignTitleMediumTextBlock}"
+                    Text="{Binding 权限控制_新增编辑账号, Source={x:Static lang:MultiLang.Instance}}"
+                    TextWrapping="NoWrap" />
+            </StackPanel>
+            <StackPanel
+                Grid.Row="1"
+                VerticalAlignment="Top"
+                Orientation="Vertical">
+                <TextBlock
+                    Margin="10,5,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="{Binding 账号, Source={x:Static lang:MultiLang.Instance}}" />
+                <TextBox
+                    Name="TxtAccount"
+                    Margin="50,5,10,0"
+                    VerticalAlignment="Center"
+                    materialDesign:ValidationAssist.HorizontalAlignment="Left"
+                    IsEnabled="{Binding Editable}">
+                    <TextBox.Text>
+                        <Binding Path="Account" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <valid:LengthValidRule MinLength="6" ValidatesOnTargetUpdated="True" />
+                                <valid:OnlyAlphabetAndNumbersValidRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock
+                    Margin="10,5,0,0"
+                    VerticalAlignment="Center"
+                    Text="{Binding 名称, Source={x:Static lang:MultiLang.Instance}}" />
+                <TextBox
+                    Name="TxtName"
+                    Margin="50,5,10,0"
+                    VerticalAlignment="Center"
+                    materialDesign:ValidationAssist.HorizontalAlignment="Left">
+                    <TextBox.Text>
+                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <valid:LengthValidRule MinLength="6" ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock
+                    Margin="10,5,0,0"
+                    VerticalAlignment="Center"
+                    Text="{Binding 密码, Source={x:Static lang:MultiLang.Instance}}" />
+                <PasswordBox
+                    Name="TxtPassword"
+                    Margin="50,5,10,0"
+                    VerticalAlignment="Center"
+                    materialDesign:PasswordBoxAssist.Password="{Binding Password, Mode=TwoWay}"
+                    materialDesign:TextFieldAssist.HasClearButton="True" />
+                <TextBlock
+                    Margin="10,5,0,0"
+                    VerticalAlignment="Center"
+                    Text="{Binding 角色, Source={x:Static lang:MultiLang.Instance}}" />
+                <ListView
+                    MaxHeight="150"
+                    Margin="50,5,10,0"
+                    ItemsSource="{Binding Roles}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel VerticalAlignment="Top" Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                                Height="24"
+                                Margin="10,0,10,0"
+                                IsChecked="{Binding Selected}"
+                                ToolTip="{Binding Name}">
+                                <TextBlock
+                                    MaxWidth="120"
+                                    Text="{Binding Name}"
+                                    TextTrimming="CharacterEllipsis" />
+                            </CheckBox>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            <StackPanel
+                Grid.Row="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    Name="BtnConfirm"
+                    Width="90"
+                    Margin="0,0,5,0"
+                    Click="BtnConfirm_Click"
+                    Content="{Binding 确定, Source={x:Static lang:MultiLang.Instance}}" />
+                <Button
+                    Name="BtnCancel"
+                    Width="90"
+                    Margin="5,0,0,0"
+                    Click="BtnCancel_Click"
+                    Content="{Binding 取消, Source={x:Static lang:MultiLang.Instance}}"
+                    Style="{StaticResource MaterialDesignFlatButton}" />
+            </StackPanel>
+        </Grid>
+    </materialDesign:Card>
+</UserControl>

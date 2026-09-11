@@ -1,0 +1,78 @@
+{
+	"CommerceAndIndustry": [
+		{
+			"ModelName": "STACK100",
+			"BatteryType": "LiFePO4",
+			"MinSystemEnergy": 15360,
+			"MaxSystemEnergy": 76800,
+			"ModuleVoltage": 51.2,
+			"ModuleCapacity": 100,
+			"Width": 591,
+			"Deepth": 390,
+			"Height": 1700,
+			"IngressProtection": "IP55",
+			"LocalPicturePath": "/Resources/Images/STACK100.png"
+		},
+		{
+			"ModelName": "STACK280",
+			"BatteryType": "LiFePO4",
+			"MinSystemEnergy": 43000,
+			"MaxSystemEnergy": 215040,
+			"ModuleVoltage": 51.2,
+			"ModuleCapacity": 100,
+			"Width": 591,
+			"Deepth": 390,
+			"Height": 1700,
+			"IngressProtection": "IP20",
+			"LocalPicturePath": "/Resources/Images/STACK280.png"
+		},
+		{
+			"ModelName": "BF100-C80",
+			"BatteryType": "LiFePO4",
+			"RecycleLifetime": ">=8000 loops/10years",
+			"SoC": 86000,
+			"Weight": "1100±100",
+			"Width": 725,
+			"Deepth": 1200,
+			"Height": 2260,
+			"IngressProtection": "IP55",
+			"LocalPicturePath": "/Resources/Images/BF100.png"
+		},
+		{
+			"ModelName": "BF100-C100",
+			"BatteryType": "LiFePO4",
+			"RecycleLifetime": ">=8000 loops/10years",
+			"SoC": 100000,
+			"Weight": "1200±100",
+			"Width": 725,
+			"Deepth": 1200,
+			"Height": 2260,
+			"IngressProtection": "IP55",
+			"LocalPicturePath": "/Resources/Images/BF100.png"
+		},
+		{
+			"ModelName": "BF200",
+			"BatteryType": "LiFePO4",
+			"Pack": "1P16S*15",
+			"SoC": 215000,
+			"Weight": "2500",
+			"Width": 1320,
+			"Deepth": 1190,
+			"Height": 2250,
+			"IngressProtection": "IP55",
+			"LocalPicturePath": "/Resources/Images/BF200.png"
+		},
+		{
+			"ModelName": "BF200DC",
+			"BatteryType": "LiFePO4",
+			"Pack": "1P16S*15",
+			"SoC": 215000,
+			"Weight": "2500",
+			"Width": 1320,
+			"Deepth": 1190,
+			"Height": 2250,
+			"IngressProtection": "IP55",
+			"LocalPicturePath": "/Resources/Images/BF200DC.png"
+		}
+	]
+}

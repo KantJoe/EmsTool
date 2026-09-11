@@ -1,0 +1,150 @@
+﻿<UserControl
+    x:Class="org.Ui.Views.EditPointAlertDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lang="clr-namespace:org.Ui.MultiLanguage;assembly=org.Ui"
+    xmlns:local="clr-namespace:org.Ui.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mconvt="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+    xmlns:selectors="clr-namespace:org.Ui.Selectors;assembly=org.Ui"
+    xmlns:viewModels="clr-namespace:org.Ui.ViewModels"
+    Width="280"
+    Height="360"
+    TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
+    mc:Ignorable="d">
+    <Grid Margin="10,10,10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DockPanel
+            Grid.Row="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Left" Text="功能码: " />
+            <TextBlock
+                Name="TxtFunctionCode"
+                HorizontalAlignment="Right"
+                Text="03" />
+        </DockPanel>
+        <DockPanel
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Left" Text="地址: " />
+            <TextBox
+                Name="TxtAddress"
+                Width="80"
+                HorizontalAlignment="Right"
+                HorizontalContentAlignment="Right"
+                IsReadOnly="True"
+                Text="0" />
+        </DockPanel>
+        <DockPanel
+            Grid.Row="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Left" Text="数量: " />
+            <TextBlock
+                Name="TxtCount"
+                HorizontalAlignment="Right"
+                Text="1" />
+        </DockPanel>
+        <DockPanel
+            Grid.Row="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Left" Text="告警条件: " />
+            <ComboBox
+                Name="CbCondition"
+                Width="120"
+                HorizontalAlignment="Right"
+                SelectionChanged="CbCondition_SelectionChanged"
+                HorizontalContentAlignment="Right">
+                <ComboBoxItem Content="无" IsEnabled="False" />
+                <ComboBoxItem Content="小于" />
+                <ComboBoxItem Content="小于等于" />
+                <ComboBoxItem Content="等于" />
+                <ComboBoxItem Content="不等于" />
+                <ComboBoxItem Content="大于等于" />
+                <ComboBoxItem Content="大于" IsSelected="True" />
+                <ComboBoxItem Content="在范围之内" />
+                <ComboBoxItem Content="不在范围之内" />
+                <ComboBoxItem Content="值产生变化" />
+            </ComboBox>
+        </DockPanel>
+        <DockPanel
+            Grid.Row="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center">
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="阈值: " />
+            <TextBox
+                Name="TxtThreshold"
+                Width="80"
+                HorizontalAlignment="Right"
+                HorizontalContentAlignment="Right" />
+        </DockPanel>
+        <DockPanel
+            Grid.Row="5"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center">
+            <TextBlock
+                HorizontalAlignment="Right"
+                FontSize="10"
+                Foreground="Red"
+                Text="*范围值以,隔开如 1,2 左开右闭原则" />
+        </DockPanel>
+        <DockPanel
+            Grid.Row="6"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center">
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="告警次数: " />
+            <ComboBox
+                Name="CbTimes"
+                Width="120"
+                HorizontalAlignment="Right"
+                HorizontalContentAlignment="Right">
+                <ComboBoxItem Content="无" IsEnabled="False" />
+                <ComboBoxItem Content="仅一次" IsSelected="True" />
+                <ComboBoxItem Content="每分钟一次" />
+                <ComboBoxItem Content="每小时一次" />
+                <ComboBoxItem Content="每天一次" />
+                <ComboBoxItem Content="总是告警" />
+            </ComboBox>
+        </DockPanel>
+        <StackPanel
+            Grid.Row="7"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                Name="BtnConfirm"
+                Width="80"
+                Height="40"
+                Margin="0,0,20,0"
+                Click="BtnConfirm_Click"
+                Content="{Binding 确定, Source={x:Static lang:MultiLang.Instance}}" />
+            <Button
+                Width="80"
+                Height="40"
+                Margin="20,0,0,0"
+                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                CommandParameter="Sample2Cancel"
+                Content="{Binding 取消, Source={x:Static lang:MultiLang.Instance}}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

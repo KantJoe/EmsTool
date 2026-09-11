@@ -1,0 +1,48 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/01.org.Ui/">
+    <Project Path="src/org.Ui.Poseidon/org.Ui.Poseidon.csproj" Id="e4522a98-9b18-4d9b-a1f0-eb1c382fad2a">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="src/org.Ui/org.Ui.csproj" Id="8e51532b-eadf-4388-a6df-8acba3604cf7">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/02.org.DeviceProtocols/">
+    <Project Path="src/libraries/org.Product01/org.Product01.csproj">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/03.org.DomainService/">
+    <Project Path="src/org.DomainService/org.DomainService.Firmware/org.DomainService.Firmware.csproj" Id="e5d05217-48eb-43ef-8a10-607276d4bc80">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/04.org.Components/">
+    <Project Path="src/libraries/org.Communication/org.Communication.csproj">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="src/libraries/org.DataAccess/org.DataAccess.csproj" Id="9ffe1312-cd29-4590-a53b-f8a68f8e1795">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="src/libraries/org.Privilege/org.Privilege.csproj" Id="6582d3bd-fb3d-4865-a940-62968583fbca">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/05.org.Infrastructure/">
+    <Project Path="src/libraries/org.Models/org.Models.csproj" Id="794218ca-bc1d-4be0-9af3-8e63b3b325c4">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="src/libraries/org.Utils/org.Utils.csproj">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/10.org.UnitTest/">
+    <Project Path="unitTests/org.UnitTests/org.UnitTests.csproj">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+  </Folder>
+</Solution>

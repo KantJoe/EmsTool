@@ -1,0 +1,225 @@
+﻿<UserControl
+    x:Class="org.Ui.Poseidon.Views.DeviceTopologyControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lang="clr-namespace:org.Ui.MultiLanguage;assembly=org.Ui"
+    xmlns:local="clr-namespace:org.Ui.Poseidon.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:selectors="clr-namespace:org.Ui.Selectors;assembly=org.Ui"
+    xmlns:viewModels="clr-namespace:org.Ui.Poseidon.ViewModels"
+    d:DesignHeight="758"
+    d:DesignWidth="1248"
+    Loaded="UserControl_Loaded"
+    Unloaded="UserControl_Unloaded"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <selectors:MultipleDateTypeSelector x:Key="viewSelector">
+                <selectors:MultipleDateTypeSelector.RtuTemplate>
+                    <DataTemplate>
+                        <materialDesign:Flipper
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            materialDesign:ElevationAssist.Elevation="Dp4">
+                            <materialDesign:Flipper.FrontContent>
+                                <StackPanel
+                                    Width="180"
+                                    Height="350"
+                                    Orientation="Vertical">
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <Button
+                                            Command="{Binding DataContext.ConnectOneCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, IsAsync=True}"
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}">
+                                            <materialDesign:PackIcon HorizontalAlignment="Center" Kind="Link" />
+                                        </Button>
+                                        <Button Command="{x:Static materialDesign:Flipper.FlipCommand}" Style="{StaticResource MaterialDesignOutlinedButton}">
+                                            <materialDesign:PackIcon HorizontalAlignment="Center" Kind="CommentEdit" />
+                                        </Button>
+                                        <Button
+                                            Command="{Binding DataContext.DeleteRtuCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}">
+                                            <materialDesign:PackIcon HorizontalAlignment="Center" Kind="Delete" />
+                                        </Button>
+                                    </StackPanel>
+                                    <TextBlock Text="SlaveId" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Options.SlaveId}" />
+                                    <TextBlock Text="{Binding 设备拓扑_串口号, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Options.PortName}" />
+                                    <TextBlock Text="{Binding 设备拓扑_波特率, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Options.BaudRate}" />
+                                    <TextBlock Text="{Binding 设备拓扑_数据位, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Options.DataBits}" />
+                                    <TextBlock Text="{Binding 设备拓扑_校验位, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Options.Parity}" />
+                                    <TextBlock Text="{Binding 设备拓扑_停止位, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Options.StopBits}" />
+                                    <TextBlock Text="{Binding 创建项目_协议类型, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding SelectedProtocol}" />
+                                </StackPanel>
+                            </materialDesign:Flipper.FrontContent>
+                            <materialDesign:Flipper.BackContent>
+                                <StackPanel
+                                    Width="180"
+                                    Height="350"
+                                    Orientation="Vertical">
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <Button Command="{x:Static materialDesign:Flipper.FlipCommand}" Style="{StaticResource MaterialDesignOutlinedButton}">
+                                            <materialDesign:PackIcon HorizontalAlignment="Right" Kind="ArrowLeft" />
+                                        </Button>
+                                    </StackPanel>
+                                    <TextBlock Text="SlaveId" />
+                                    <TextBox HorizontalContentAlignment="Center" Text="{Binding Options.SlaveId}" />
+                                    <TextBlock Text="{Binding 设备拓扑_串口号, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBox HorizontalContentAlignment="Center" Text="{Binding Options.PortName}" />
+                                    <TextBlock Text="{Binding 设备拓扑_波特率, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBox HorizontalContentAlignment="Center" Text="{Binding Options.BaudRate}" />
+                                    <TextBlock Text="{Binding 设备拓扑_数据位, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBox HorizontalContentAlignment="Center" Text="{Binding Options.DataBits}" />
+                                    <TextBlock Text="{Binding 设备拓扑_校验位, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBox HorizontalContentAlignment="Center" Text="{Binding Options.Parity}" />
+                                    <TextBlock Text="{Binding 设备拓扑_停止位, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBox HorizontalContentAlignment="Center" Text="{Binding Options.StopBits}" />
+                                    <TextBlock Text="{Binding 创建项目_协议类型, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <ComboBox ItemsSource="{Binding Protocols}" SelectedItem="{Binding SelectedProtocol}" />
+                                </StackPanel>
+                            </materialDesign:Flipper.BackContent>
+                        </materialDesign:Flipper>
+                    </DataTemplate>
+                </selectors:MultipleDateTypeSelector.RtuTemplate>
+                <selectors:MultipleDateTypeSelector.TcpTemplate>
+                    <DataTemplate>
+                        <materialDesign:Flipper
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            materialDesign:ElevationAssist.Elevation="Dp4">
+                            <materialDesign:Flipper.FrontContent>
+                                <StackPanel
+                                    Width="180"
+                                    Height="350"
+                                    Orientation="Vertical">
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <Button Command="{x:Static materialDesign:Flipper.FlipCommand}" Style="{StaticResource MaterialDesignOutlinedButton}">
+                                            <materialDesign:PackIcon HorizontalAlignment="Left" Kind="CommentEdit" />
+                                        </Button>
+                                        <Button
+                                            Command="{Binding DataContext.DeleteTcpCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource MaterialDesignOutlinedButton}">
+                                            <materialDesign:PackIcon HorizontalAlignment="Left" Kind="Delete" />
+                                        </Button>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding 设备拓扑_Ip, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Options.Ip}" />
+                                    <TextBlock Text="{Binding 设备拓扑_端口号, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Options.Port}" />
+                                    <TextBlock Text="{Binding 创建项目_协议类型, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding SelectedProtocol}" />
+                                </StackPanel>
+                            </materialDesign:Flipper.FrontContent>
+                            <materialDesign:Flipper.BackContent>
+                                <StackPanel
+                                    Width="180"
+                                    Height="350"
+                                    Orientation="Vertical">
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <Button Command="{x:Static materialDesign:Flipper.FlipCommand}" Style="{StaticResource MaterialDesignOutlinedButton}">
+                                            <materialDesign:PackIcon HorizontalAlignment="Right" Kind="ArrowLeft" />
+                                        </Button>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding 设备拓扑_Ip, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBox HorizontalContentAlignment="Center" Text="{Binding Options.Ip}" />
+                                    <TextBlock Text="{Binding 设备拓扑_端口号, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <TextBox HorizontalContentAlignment="Center" Text="{Binding Options.Port}" />
+                                    <TextBlock Text="{Binding 创建项目_协议类型, Source={x:Static lang:MultiLang.Instance}}" />
+                                    <ComboBox ItemsSource="{Binding Protocols}" SelectedItem="{Binding SelectedProtocol}" />
+                                </StackPanel>
+                            </materialDesign:Flipper.BackContent>
+                        </materialDesign:Flipper>
+                    </DataTemplate>
+                </selectors:MultipleDateTypeSelector.TcpTemplate>
+            </selectors:MultipleDateTypeSelector>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <TabControl
+        materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+        materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+        Style="{StaticResource MaterialDesignFilledTabControl}"
+        TabStripPlacement="Top">
+        <TabItem Header="{Binding 设备拓扑_设备连接, Source={x:Static lang:MultiLang.Instance}}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <materialDesign:Card
+                    Grid.Column="0"
+                    Margin="0,8,10,0"
+                    VerticalAlignment="Top"
+                    materialDesign:ElevationAssist.Elevation="Dp8">
+                    <StackPanel Orientation="Vertical">
+                        <Button
+                            Name="BtnQuickConnect"
+                            Width="140"
+                            Margin="0,10,0,10"
+                            Click="BtnQuickConnect_Click"
+                            Content="{Binding 设备拓扑_一键连接, Source={x:Static lang:MultiLang.Instance}}"
+                            Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}" />
+                        <Button
+                            Name="BtnQuickDisconnect"
+                            Width="140"
+                            Margin="0,10,0,10"
+                            Click="BtnQuickDisconnect_Click"
+                            Content="{Binding 设备拓扑_一键断开, Source={x:Static lang:MultiLang.Instance}}"
+                            Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}" />
+                        <Button
+                            Width="140"
+                            Margin="0,10,0,10"
+                            Command="{Binding AddRtuConnectionCommand}"
+                            Content="{Binding 设备拓扑_新增Rtu, Source={x:Static lang:MultiLang.Instance}}"
+                            Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}" />
+                        <Button
+                            Width="140"
+                            Margin="0,10,0,10"
+                            Command="{Binding AddTcpConnectionCommand}"
+                            Content="{Binding 设备拓扑_新增Tcp, Source={x:Static lang:MultiLang.Instance}}"
+                            Style="{StaticResource MaterialDesignFlatSecondaryMidBgButton}" />
+                    </StackPanel>
+                </materialDesign:Card>
+                <ListBox
+                    Grid.Column="1"
+                    materialDesign:ListBoxItemAssist.ShowSelection="False"
+                    ItemTemplateSelector="{StaticResource viewSelector}"
+                    ItemsSource="{Binding Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel VerticalAlignment="Top" Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </Grid>
+        </TabItem>
+        <TabItem Header="{Binding 设备拓扑_设备拓扑, Source={x:Static lang:MultiLang.Instance}}" IsSelected="True">
+
+            <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,10,40,10" Text="指定Ems: " />
+                    <ComboBox
+                        Name="CbLinks"
+                        Width="180"
+                        ItemsSource="{Binding Links}"
+                        SelectedItem="{Binding SelectedLink}"
+                        SelectionChanged="CbLinks_SelectionChanged" />
+                </StackPanel>
+                <ScrollViewer VerticalAlignment="Top" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding EnergyMovingTopology}" />
+                </ScrollViewer>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</UserControl>

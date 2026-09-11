@@ -1,0 +1,2897 @@
+﻿<UserControl
+    x:Class="org.Product01.Views.DeviceSummaryControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:convert="clr-namespace:org.Ui.Converters;assembly=org.Ui"
+    xmlns:convt="clr-namespace:org.Ui.Converters;assembly=org.Ui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lang="clr-namespace:org.Ui.MultiLanguage;assembly=org.Ui"
+    xmlns:local="clr-namespace:org.Product01.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:selectors="clr-namespace:org.Ui.Selectors;assembly=org.Ui"
+    xmlns:viewModels="clr-namespace:org.Product01.ViewModels"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/org.Ui;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <WrapPanel
+            Margin="10,0,10,10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <materialDesign:Card
+                Width="340"
+                Height="350"
+                Margin="0,10,10,0"
+                materialDesign:ElevationAssist.Elevation="Dp16"
+                IsHitTestVisible="False">
+                <StackPanel
+                    Margin="5,10,5,10"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_散热类型, Source={x:Static lang:MultiLang.Instance}, FallbackValue=散热类型}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding DissipationType}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统状态}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SystemStateText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_运行模式, Source={x:Static lang:MultiLang.Instance}, FallbackValue=运行模式}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding RunningModeText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_离并网状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=离并网状态}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridConnectedText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_联网状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=联网状态}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding OnlinedText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_EMS状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=EMS状态}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding EmsStateText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_配置文件代码, Source={x:Static lang:MultiLang.Instance}, FallbackValue=配置文件代码}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding ConfigFileCode}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_风扇转速, Source={x:Static lang:MultiLang.Instance}, FallbackValue=风扇转速}" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding FanRpmText, FallbackValue=NC}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text=" Rpm" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统额定功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统额定功率}" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding StateOfChargeText, FallbackValue=-}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text=" Kw" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_湿度01, Source={x:Static lang:MultiLang.Instance}, FallbackValue=湿度01}" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding Humidity01, FallbackValue=-}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text=" %" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_湿度02, Source={x:Static lang:MultiLang.Instance}, FallbackValue=湿度02}" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding Humidity02, FallbackValue=-}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text=" %" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_温度01, Source={x:Static lang:MultiLang.Instance}, FallbackValue=温度01}" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding Temperature01, FallbackValue=-}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text=" ℃" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_温度02, Source={x:Static lang:MultiLang.Instance}, FallbackValue=温度02}" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding Temperature02, FallbackValue=-}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text=" ℃" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_温度03, Source={x:Static lang:MultiLang.Instance}, FallbackValue=温度03}" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding Temperature03, FallbackValue=-}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text=" ℃" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_温度04, Source={x:Static lang:MultiLang.Instance}, FallbackValue=温度04}" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding Temperature04, FallbackValue=-}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text=" ℃" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_EMS固件版本, Source={x:Static lang:MultiLang.Instance}, FallbackValue=EMS固件版本}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding EmsFirmware}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_BMS固件版本, Source={x:Static lang:MultiLang.Instance}, FallbackValue=BMS固件版本}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding BmsFirmware}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_HMI固件版本, Source={x:Static lang:MultiLang.Instance}, FallbackValue=HMI固件版本}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding HmiFirmware}" />
+                    </DockPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="340"
+                Height="350"
+                Margin="0,10,10,0"
+                materialDesign:ElevationAssist.Elevation="Dp16"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <StackPanel
+                    Margin="5,10,5,10"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_模组联机状态HL, Source={x:Static lang:MultiLang.Instance}, FallbackValue=模组联机状态 H and L}" />
+                        <WrapPanel
+                            Margin="10,0,0,0"
+                            IsHitTestVisible="False"
+                            Orientation="Horizontal">
+                            <CheckBox Content="{Binding 设备状态_Bit00BMS, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit00 BMS}" IsChecked="{Binding BmsOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit01消防, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit01 消防}" IsChecked="{Binding FireOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit02PCS, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit02 PCS}" IsChecked="{Binding PcsOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit03DCDC, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit03 DCDC}" IsChecked="{Binding DcdcOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit04MPPT, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit04 MPPT}" IsChecked="{Binding MpptOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit05STS, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit05 STS}" IsChecked="{Binding StsOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit06电表, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit06 电表}" IsChecked="{Binding ElectricOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit07空调, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit07 空调}" IsChecked="{Binding AirConditionOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit08液冷机组, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit08 液冷机组}" IsChecked="{Binding LiquidOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit09HMI, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit09 HMI}" IsChecked="{Binding HmiOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit10PC, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit10 PC}" IsChecked="{Binding PcOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit11GPS, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit11 GPS}" IsChecked="{Binding GpsOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit12FourG, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit12 4G}" IsChecked="{Binding FourGOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit13Wifi, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit13 Wifi}" IsChecked="{Binding WifiOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit14蓝牙, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit14 蓝牙}" IsChecked="{Binding BluetoothOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit15LAN1, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit15 LAN1}" IsChecked="{Binding Lan1OnlineState, Mode=OneWay}" />
+                        </WrapPanel>
+                        <Rectangle
+                            Height="1"
+                            Margin="10,0,0,0"
+                            Stroke="DimGray" />
+                        <WrapPanel Margin="10,0,0,0" IsHitTestVisible="False">
+                            <CheckBox Content="{Binding 设备状态_Bit00LAN2, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit00 LAN2}" IsChecked="{Binding Lan2OnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit01温湿度, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit01 温湿度}" IsChecked="{Binding HumidityAndTempOnlineState, Mode=OneWay}" />
+                            <CheckBox Content="{Binding 设备状态_Bit02并机通讯, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Bit02 并机通讯}" IsChecked="{Binding GridConnectedOnlineState, Mode=OneWay}" />
+                        </WrapPanel>
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统故障, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统故障}" />
+                        <WrapPanel
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                Width="40"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{Binding Fault01, Converter={x:Static convt:UshortToBrushConverter.Green}}"
+                                TextAlignment="Right"
+                                ToolTip="{Binding Fault01}" />
+                            <TextBlock
+                                Width="40"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{Binding Fault02, Converter={x:Static convt:UshortToBrushConverter.Green}}"
+                                TextAlignment="Right"
+                                ToolTip="{Binding Fault02}" />
+                            <TextBlock
+                                Width="40"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{Binding Fault03, Converter={x:Static convt:UshortToBrushConverter.Green}}"
+                                TextAlignment="Right"
+                                ToolTip="{Binding Fault03}" />
+                            <TextBlock
+                                Width="40"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{Binding Fault04, Converter={x:Static convt:UshortToBrushConverter.Green}}"
+                                TextAlignment="Right"
+                                ToolTip="{Binding Fault04}" />
+                            <TextBlock
+                                Width="40"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{Binding Fault05, Converter={x:Static convt:UshortToBrushConverter.Green}}"
+                                TextAlignment="Right"
+                                ToolTip="{Binding Fault05}" />
+                        </WrapPanel>
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统告警, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统告警}" />
+                        <WrapPanel
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                Width="40"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{Binding Warning01, Converter={x:Static convt:UshortToBrushConverter.Green}}"
+                                TextAlignment="Right"
+                                ToolTip="{Binding Warning01}" />
+                            <TextBlock
+                                Width="40"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{Binding Warning02, Converter={x:Static convt:UshortToBrushConverter.Green}}"
+                                TextAlignment="Right"
+                                ToolTip="{Binding Warning02}" />
+                            <TextBlock
+                                Width="40"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{Binding Warning03, Converter={x:Static convt:UshortToBrushConverter.Green}}"
+                                TextAlignment="Right"
+                                ToolTip="{Binding Warning03}" />
+                            <TextBlock
+                                Width="40"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{Binding Warning04, Converter={x:Static convt:UshortToBrushConverter.Green}}"
+                                TextAlignment="Right"
+                                ToolTip="{Binding Warning04}" />
+                            <TextBlock
+                                Width="40"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{Binding Warning05, Converter={x:Static convt:UshortToBrushConverter.Green}}"
+                                TextAlignment="Right"
+                                ToolTip="{Binding Warning05}" />
+                        </WrapPanel>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="460"
+                Height="350"
+                Margin="0,10,10,0"
+                materialDesign:ElevationAssist.Elevation="Dp16"
+                IsHitTestVisible="False">
+                <StackPanel
+                    Margin="5,10,5,10"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_BMS联机状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=BMS联机状态}" />
+                        <ListView
+                            Margin="10,0,0,0"
+                            materialDesign:ListBoxItemAssist.ShowSelection="False"
+                            ItemsSource="{Binding BmsOnlines}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel
+                                        Height="32"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <CheckBox Content="{Binding Key, Mode=OneWay}" IsChecked="{Binding IsChecked}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PCS联机状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PCS联机状态}" />
+                        <ListView
+                            Margin="10,0,0,0"
+                            materialDesign:ListBoxItemAssist.ShowSelection="False"
+                            ItemsSource="{Binding PcsOnlines}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel
+                                        Height="32"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <CheckBox Content="{Binding Key, Mode=OneWay}" IsChecked="{Binding IsChecked}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_DCDC联机状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=DCDC联机状态}" />
+                        <ListView
+                            Margin="10,0,0,0"
+                            materialDesign:ListBoxItemAssist.ShowSelection="False"
+                            ItemsSource="{Binding DcdcOnlines}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel
+                                        Height="32"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <CheckBox Content="{Binding Key, Mode=OneWay}" IsChecked="{Binding IsChecked}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_MPPT联机状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=MPPT联机状态}" />
+                        <ListView
+                            Margin="10,0,0,0"
+                            materialDesign:ListBoxItemAssist.ShowSelection="False"
+                            ItemsSource="{Binding MpptOnlines}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel
+                                        Height="32"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <CheckBox Content="{Binding Key, Mode=OneWay}" IsChecked="{Binding IsChecked}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_Meter联机状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Meter联机状态}" />
+                        <ListView
+                            Margin="10,0,0,0"
+                            materialDesign:ListBoxItemAssist.ShowSelection="False"
+                            ItemsSource="{Binding MeterOnlines}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel
+                                        Height="32"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <CheckBox Content="{Binding Key, Mode=OneWay}" IsChecked="{Binding IsChecked}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="340"
+                Height="350"
+                Margin="0,10,10,0"
+                VerticalAlignment="Top"
+                IsHitTestVisible="False">
+                <StackPanel
+                    Margin="5,10,5,10"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridPower}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网频率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网频率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridFrequency}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网A相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网A相电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridAVoltage}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网A相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网A相电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridACurrent}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网A相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网A相功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridAPower}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网B相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网B相电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridBVoltage}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网B相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网B相电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridBCurrent}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网B相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网B相功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridBPower}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网C相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网C相电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridCVoltage}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网C相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网C相电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridCCurrent}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网C相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网C相功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridCPower}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_A线电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=A线电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridLineAVoltage}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_B线电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=B线电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridLineBVoltage}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_C线电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=C线电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridLineCVoltage}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_A相功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=A相功率因数}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridAPowerFactor}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_B相功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=B相功率因数}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridBPowerFactor}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_C相功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=C相功率因数}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridCPowerFactor}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_总功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=总功率因数}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridTotalPowerFactor}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电网状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网状态}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GridStateText}" />
+                    </DockPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="340"
+                Height="350"
+                Margin="0,10,10,0"
+                VerticalAlignment="Top"
+                IsHitTestVisible="False">
+                <StackPanel
+                    Margin="5,10,5,10"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV输入功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV输入功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding PvInputPower}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_MPPT路数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=MPPT路数}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding PvMpptCount}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV1电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV1电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv1VoltageText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV1电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV1电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv1CurrentText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV2电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV2电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv2VoltageText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV2电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV2电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv2CurrentText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV3电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV3电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv3VoltageText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV3电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV3电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv3CurrentText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV4电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV4电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv4VoltageText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV4电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV4电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv4CurrentText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV5电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV5电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv5VoltageText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV5电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV5电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv5CurrentText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV6电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV6电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv6VoltageText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV6电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV6电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv6CurrentText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV7电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV7电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv7VoltageText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV7电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV7电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv7CurrentText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV8电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV8电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv8VoltageText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_PV8电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV8电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Pv8CurrentText}" />
+                    </DockPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="460"
+                Height="350"
+                Margin="0,10,10,0"
+                IsHitTestVisible="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel
+                        Grid.Column="0"
+                        Margin="5,10,5,10"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_负载数据, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载数据}" />
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载A相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载A相电压}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadAVoltage}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载A相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载A相功率}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadAPower}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载B相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载B相电压}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadBVoltage}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载B相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载B相功率}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadBPower}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载C相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载C相电压}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadCVoltage}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载C相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载C相功率}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadCPower}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载总功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载总功率}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadTotalPower}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载频率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载频率}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadFrequency}" />
+                        </DockPanel>
+
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="" />
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_电池数据, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池数据}" />
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池功率}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding BatteryPower}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池SoC, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池SoC}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding BatterySoc}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池状态}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding BatteryStateText}" />
+                        </DockPanel>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="5,10,5,10"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载A相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载A相电流}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadACurrent}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载A相功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载A相功率因数}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadAPowerFactor}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载B相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载B相电流}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadBCurrent}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载B相功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载B相功率因数}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadBPowerFactor}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载C相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载C相电流}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadCCurrent}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载C相功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载C相功率因数}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadCPowerFactor}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载功率因数}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding LoadPowerFactor}" />
+                        </DockPanel>
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="" />
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="" />
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="" />
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池电压}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding BatteryVoltage}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池电流}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding BatteryCurrent}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电网充电功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网充电功率}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding GridChargePower}" />
+                        </DockPanel>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="340"
+                Height="350"
+                Margin="0,10,10,0"
+                VerticalAlignment="Top"
+                IsHitTestVisible="False">
+                <StackPanel
+                    Margin="5,10,5,10"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变频率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变频率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverFrequency}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变总功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变总功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverTotalPower}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变A相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变A相电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverAVoltage}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变A相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变A相电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverACurrent}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变A相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变A相功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverAPower}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变B相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变B相电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverBVoltage}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变B相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变B相电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverBCurrent}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变B相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变B相功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverBPower}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变C相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变C相电压}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverCVoltage}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变C相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变C相电流}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverCCurrent}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变C相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变C相功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverCPower}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变功率因数}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverPowerFactor}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_逆变状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=逆变状态}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding InverStateText}" />
+                    </DockPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="340"
+                Height="350"
+                Margin="0,10,10,0"
+                VerticalAlignment="Top"
+                IsHitTestVisible="False">
+                <StackPanel
+                    Margin="5,10,5,10"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_发电机功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=发电机功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding GeneratorPowerText}" />
+                    </DockPanel>
+
+                    <TextBlock />
+
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统发电功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统发电功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SystemEletricPowerText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_自发自用功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=自发自用功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SelfUsePowerText}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_光伏逆变器功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=光伏逆变器功率}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SolarInverterPowerText}" />
+                    </DockPanel>
+
+                    <TextBlock />
+
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统时间年, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统时间年}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SystemTimeYear}" />
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统时间月, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统时间月}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SystemTimeMonth}" />
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统时间日, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统时间日}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SystemTimeDayOfMonth}" />
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统时间时, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统时间时}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SystemTimeHour}" />
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统时间分, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统时间分}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SystemTimeMinute}" />
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统时间秒, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统时间秒}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SystemTimeSecond}" />
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_系统时间周, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统时间周}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SystemTimeDayOfWeek}" />
+                    </DockPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="460"
+                Height="350"
+                Margin="0,10,10,0"
+                VerticalAlignment="Top"
+                IsHitTestVisible="False">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel
+                        Margin="5,10,5,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <StackPanel
+                            Width="220"
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Orientation="Vertical">
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_并机标识, Source={x:Static lang:MultiLang.Instance}, FallbackValue=并机标识}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelStateText, FallbackValue=否}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_主从机, Source={x:Static lang:MultiLang.Instance}, FallbackValue=主从机}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelIdentityText, FallbackValue=从机}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_本机ID, Source={x:Static lang:MultiLang.Instance}, FallbackValue=本机ID}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelId, FallbackValue=0}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_并机数量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=并机数量}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelCount, FallbackValue=0}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_ParallelMppt路数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=Mppt路数}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelMpptCount, FallbackValue=0}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_InvPV功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=InvPV功率}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelInvPvPower, FallbackValue=0}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网功率}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelGridPower, FallbackValue=0}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网频率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网频率}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelGridFrequency, FallbackValue=0}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网状态, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网频率}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelGridStateText, FallbackValue=待机}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网总功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=总功率因数}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelTotalPowerFactor, FallbackValue=0}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网A线电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网A线电压}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelLineAVoltage, FallbackValue=0}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网B线电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网B线电压}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelLineBVoltage, FallbackValue=0}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网C线电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网C线电压}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelLineCVoltage, FallbackValue=0}" />
+                            </DockPanel>
+
+                        </StackPanel>
+                        <StackPanel
+                            Width="220"
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Orientation="Vertical">
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网A相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网A相电压}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelAVoltage, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网A相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网A相电流}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelACurrent, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网A相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网A相功率}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelAPower, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网A相功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网A相功率因数}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelAPowerFactor, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网B相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网B相电压}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelBVoltage, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网B相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网B相电流}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelBCurrent, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网B相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网B相功率}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelBPower, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网B相功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网B相功率因数}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelBPowerFactor, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网C相电压, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网C相电压}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelCVoltage, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网C相电流, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网C相电流}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelCCurrent, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网C相功率, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网C相功率}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelCPower, FallbackValue=10}" />
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding 设备状态_电网C相功率因数, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网C相功率因数}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ParallelCPowerFactor, FallbackValue=10}" />
+                            </DockPanel>
+
+                        </StackPanel>
+                    </StackPanel>
+                    <DockPanel
+                        Margin="5,0,5,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_并机识别码, Source={x:Static lang:MultiLang.Instance}, FallbackValue=并机识别码}" />
+                        <TextBlock
+                            Margin="40,0,0,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding ParallelCode, FallbackValue=239875982374892378946327}" />
+                    </DockPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="700"
+                Height="340"
+                Margin="0,10,10,0"
+                VerticalAlignment="Top"
+                IsHitTestVisible="False">
+                <StackPanel
+                    Margin="5,0,5,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+                    <StackPanel
+                        Width="330"
+                        Margin="0,10,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        IsHitTestVisible="{Binding EnableWriteGeneratings}"
+                        Orientation="Vertical">
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前组合有功总电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前组合有功总电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvGroupValidTotalPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前组合有功尖电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前组合有功尖电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvGroupValidPeakPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前组合有功峰电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前组合有功峰电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvGroupValidSharpPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前组合有功平电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前组合有功平电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvGroupValidFlatPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前组合有功谷电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前组合有功谷电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvGroupValidVallyPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前正向有功总电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前正向有功总电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPositiveValidTotalPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前正向有功尖电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前正向有功尖电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPositiveValidPeakPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前正向有功峰电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前正向有功峰电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPositiveValidSharpPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前正向有功平电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前正向有功平电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPositiveValidFlatPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前正向有功谷电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前正向有功谷电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPositiveValidVallyPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前反向有功总电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前反向有功总电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvOppositeValidTotalPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前反向有功尖电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前反向有功尖电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvOppositeValidPeakPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前反向有功峰电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前反向有功峰电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvOppositeValidSharpPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前反向有功平电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前反向有功平电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvOppositeValidFlatPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前反向有功谷电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前反向有功谷电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvOppositeValidVallyPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_尖电价, Source={x:Static lang:MultiLang.Instance}, FallbackValue=尖电价}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPeakUnitPrice, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_峰电价, Source={x:Static lang:MultiLang.Instance}, FallbackValue=峰电价}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvSharpUnitPrice, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_平电价, Source={x:Static lang:MultiLang.Instance}, FallbackValue=平电价}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvFlatUnitPrice, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_谷电价, Source={x:Static lang:MultiLang.Instance}, FallbackValue=谷电价}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvVallyUnitPrice, FallbackValue=10}" />
+                        </DockPanel>
+                    </StackPanel>
+                    <StackPanel
+                        Width="330"
+                        Margin="10,10,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        IsHitTestVisible="{Binding EnableWriteGeneratings}"
+                        Orientation="Vertical">
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前组合无功总电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前组合无功总电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvGroupInvalidTotalPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前组合无功尖电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前组合无功尖电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvGroupInvalidPeakPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前组合无功峰电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前组合无功峰电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvGroupInvalidSharpPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前组合无功平电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前组合无功平电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvGroupInvalidFlatPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前组合无功谷电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前组合无功谷电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvGroupInvalidVallyPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前正向无功总电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前正向无功总电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPositiveInvalidTotalPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前正向无功尖电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前正向无功尖电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPositiveInvalidPeakPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前正向无功峰电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前正向无功峰电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPositiveInvalidSharpPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前正向无功平电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前正向无功平电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPositiveInvalidFlatPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前正向无功谷电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前正向无功谷电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvPositiveInvalidVallyPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前反向无功总电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前反向无功总电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvOppositeInvalidTotalPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前反向无功尖电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前反向无功尖电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvOppositeInvalidPeakPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前反向无功峰电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前反向无功峰电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvOppositeInvalidSharpPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前反向无功平电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前反向无功平电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvOppositeInvalidFlatPower, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_当前反向无功谷电能, Source={x:Static lang:MultiLang.Instance}, FallbackValue=当前反向无功谷电能}" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Text="{Binding PsfvOppositeInvalidVallyPower, FallbackValue=10}" />
+                        </DockPanel>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="450"
+                Height="340"
+                Margin="0,10,10,0"
+                VerticalAlignment="Top"
+                IsHitTestVisible="False">
+                <StackPanel
+                    Margin="5,10,5,10"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_4G模块硬件版本, Source={x:Static lang:MultiLang.Instance}, FallbackValue=4G模块硬件版本}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding HardwareVersion_4G}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_4G模块软件版本1, Source={x:Static lang:MultiLang.Instance}, FallbackValue=4G模块软件版本1}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SoftwareVersion1_4G}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_4G模块软件版本2, Source={x:Static lang:MultiLang.Instance}, FallbackValue=4G模块软件版本2}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding SoftwareVersion2_4G}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_4G模块IMEI, Source={x:Static lang:MultiLang.Instance}, FallbackValue=4G模块IMEI}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Imei_4G}" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{Binding 设备状态_4G模块SIM卡号, Source={x:Static lang:MultiLang.Instance}, FallbackValue=4G模块SIM卡号}" />
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{Binding Sim_4G}" />
+                    </DockPanel>
+
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="1160"
+                Height="450"
+                Margin="0,10,10,0">
+                <StackPanel
+                    Margin="5,0,5,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+                    <StackPanel
+                        Width="330"
+                        Margin="0,10,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        IsHitTestVisible="{Binding EnableWriteGeneratings}"
+                        Orientation="Vertical">
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_系统时发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统时发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingSystemPowerHourly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_系统日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingSystemPowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_系统月发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统月发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingSystemPowerMonthly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_系统年发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统年发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingSystemPowerYearly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_系统总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=系统总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingSystemPowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_自发自用时发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=自发自用时发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingSelfPowerHourly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_自发自用日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=自发自用日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingSelfPowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_自发自用月发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=自发自用月发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingSelfPowerMonthly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_自发自用年发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=自发自用年发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingSelfPowerYearly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_自发自用总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=自发自用总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingSelfPowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_馈入电网时发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=馈入电网时发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingFeedingPowerHourly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_馈入电网日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=馈入电网日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingFeedingPowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_馈入电网月发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=馈入电网月发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingFeedingPowerMonthly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_馈入电网年发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=馈入电网年发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingFeedingPowerYearly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_馈入电网总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=馈入电网总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingFeedingPowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                    </StackPanel>
+                    <StackPanel
+                        Width="330"
+                        Margin="10,10,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        IsHitTestVisible="{Binding EnableWriteGeneratings}"
+                        Orientation="Vertical">
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电网取电时发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网取电时发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingFetchingPowerHourly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电网取电日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网取电日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingFetchingPowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电网取电月发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网取电月发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingFetchingPowerMonthly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电网取电年发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网取电年发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingFetchingPowerYearly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电网取电总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电网取电总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingFetchingPowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载消耗时发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载消耗时发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingLoadPowerHourly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载消耗日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载消耗日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingLoadPowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载消耗月发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载消耗月发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingLoadPowerMonthly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载消耗年发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载消耗年发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingLoadPowerYearly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_负载消耗总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=负载消耗总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingLoadPowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_PV时发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV时发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingPvPowerHourly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_PV日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingPvPowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_PV月发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV月发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingPvPowerMonthly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_PV年发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV年发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingPvPowerYearly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_PV总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=PV总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingPvPowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                    </StackPanel>
+                    <StackPanel
+                        Width="330"
+                        Margin="10,10,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        IsHitTestVisible="{Binding EnableWriteGeneratings}"
+                        Orientation="Vertical">
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池放电时发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池放电时发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingBatteryDischargePowerHourly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池放电日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池放电日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingBatteryDischargePowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池放电月发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池放电月发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingBatteryDischargePowerMonthly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池放电年发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池放电年发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingBatteryDischargePowerYearly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池放电总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池放电总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingBatteryDischargePowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池充电时发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池充电时发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingBatteryChargePowerHourly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池充电日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池充电日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingBatteryChargePowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池充电月发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池充电月发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingBatteryChargePowerMonthly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池充电年发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池充电年发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingBatteryChargePowerYearly, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_电池充电总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=电池充电总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingBatteryChargePowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_发电机日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=发电机日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingPowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_发电机总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=发电机总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingPowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_ACDC日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=ACDC日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingAcDcPowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_ACDC总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=ACDC总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingAcDcPowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_DCAC日发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=DCAC日发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingDcAcPowerDaily, FallbackValue=10}" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Text="{Binding 设备状态_DCAC总发电量, Source={x:Static lang:MultiLang.Instance}, FallbackValue=DCAC总发电量}" />
+                            <TextBox
+                                Width="80"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
+                                Text="{Binding GeneratingDcAcPowerTotal, FallbackValue=10}" />
+                        </DockPanel>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="0,0,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Vertical">
+                        <Button
+                            Width="100"
+                            BorderBrush="{Binding EnableWriteGeneratings, Converter={x:Static convert:BooleanToBrushConverter.LightGreen}}"
+                            Command="{Binding EnableWriteGeneratingCommand, IsAsync=True}"
+                            Content="写入使能"
+                            Foreground="{Binding EnableWriteGeneratings, Converter={x:Static convert:BooleanToBrushConverter.LightGreen}}"
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                            ToolTip="启用后将停止该部分的数据刷新，停用后恢复" />
+                        <Button
+                            Width="100"
+                            Margin="0,40,0,0"
+                            BorderBrush="{StaticResource MaterialDesign.Brush.Secondary}"
+                            Command="{Binding WriteGeneratingCommand}"
+                            Content="写入"
+                            Foreground="{StaticResource MaterialDesign.Brush.Secondary}"
+                            Style="{StaticResource MaterialDesignOutlinedButton}" />
+                        <Button
+                            Width="100"
+                            Margin="0,40,0,0"
+                            BorderBrush="{StaticResource MaterialDesign.Brush.Secondary}"
+                            Command="{Binding ResetGeneratingCommand, IsAsync=True}"
+                            Content="复位"
+                            Foreground="{StaticResource MaterialDesign.Brush.Secondary}"
+                            Style="{StaticResource MaterialDesignOutlinedButton}" />
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Width="1050"
+                Height="360"
+                Margin="0,10,10,0"
+                IsHitTestVisible="False">
+                <StackPanel
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <TextBlock Text="04 发电量数据     2000~2124: 略" />
+                    <TextBlock Text="04 并机汇总数据   4000~4249: 略" />
+                    <StackPanel
+                        Margin="5,0,5,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <StackPanel
+                            Width="330"
+                            Margin="0,10,10,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            IsHitTestVisible="{Binding EnableWriteGeneratings}"
+                            Orientation="Vertical" />
+                        <StackPanel
+                            Width="330"
+                            Margin="10,10,10,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            IsHitTestVisible="{Binding EnableWriteGeneratings}"
+                            Orientation="Vertical" />
+                        <StackPanel
+                            Width="330"
+                            Margin="10,10,10,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            IsHitTestVisible="{Binding EnableWriteGeneratings}"
+                            Orientation="Vertical" />
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+        </WrapPanel>
+    </ScrollViewer>
+</UserControl>

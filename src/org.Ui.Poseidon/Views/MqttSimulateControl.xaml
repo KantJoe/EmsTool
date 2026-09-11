@@ -1,0 +1,362 @@
+﻿<UserControl
+    x:Class="org.Ui.Poseidon.Views.MqttSimulateControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lang="clr-namespace:org.Ui.MultiLanguage;assembly=org.Ui"
+    xmlns:local="clr-namespace:org.Ui.Poseidon.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mconvt="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+    xmlns:selectors="clr-namespace:org.Ui.Selectors;assembly=org.Ui"
+    xmlns:viewModels="clr-namespace:org.Ui.Poseidon.ViewModels"
+    d:DesignHeight="758"
+    d:DesignWidth="1238"
+    Loaded="UserControl_Loaded"
+    SizeChanged="UserControl_SizeChanged"
+    Unloaded="UserControl_Unloaded"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="MqttTopicTemplate">
+            <Grid Width="270">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70*" />
+                    <ColumnDefinition Width="30*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    Text="{Binding Topic}"
+                    TextTrimming="CharacterEllipsis"
+                    TextWrapping="NoWrap"
+                    ToolTip="{Binding Topic}" />
+                <StackPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+                    <TextBlock Text="Qos " />
+                    <TextBlock Text="{Binding Qos}" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MqttContentTemplate">
+            <StackPanel
+                MaxHeight="340"
+                Margin="20,10,20,0"
+                Orientation="Vertical">
+                <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                    <TextBlock Text="Topic: " />
+                    <TextBlock Margin="0,0,20,0" Text="{Binding Topic}" />
+                    <TextBlock Text="FunctionCode: " />
+                    <TextBlock Margin="0,0,20,0" Text="{Binding FunctionCode}" />
+                    <TextBlock Text="Qos: " />
+                    <TextBlock Margin="0,0,20,0" Text="{Binding Qos}" />
+                    <TextBlock Text="{Binding CreatedTime}" />
+                </StackPanel>
+                <TextBlock
+                    FontSize="10"
+                    Text="{Binding Text}"
+                    TextTrimming="CharacterEllipsis"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel VerticalAlignment="Top" Orientation="Vertical">
+        <Expander materialDesign:ExpanderAssist.ExpanderButtonPosition="Start" IsExpanded="{Binding SelectedDetail.Expand}">
+            <Expander.Header>
+                <Grid
+                    Height="50"
+                    Margin="0,0,-25,0"
+                    Background="{StaticResource MaterialDesign.Brush.Primary}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="480" />
+                    </Grid.ColumnDefinitions>
+                    <ComboBox
+                        Grid.Column="0"
+                        Width="260"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding Details}"
+                        SelectedItem="{Binding SelectedDetail}" />
+                    <StackPanel
+                        Grid.Column="2"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Button
+                            Width="120"
+                            HorizontalAlignment="Right"
+                            Command="{Binding AppendCommand, IsAsync=True}"
+                            Content="{Binding 新增, Source={x:Static lang:MultiLang.Instance}}"
+                            Foreground="{StaticResource MaterialDesign.Brush.Secondary.Dark}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Visibility="Collapsed" />
+                        <Button
+                            Grid.Column="2"
+                            Width="120"
+                            HorizontalAlignment="Right"
+                            Command="{Binding DisConnectCommand, IsAsync=True}"
+                            Content="{Binding 删除, Source={x:Static lang:MultiLang.Instance}}"
+                            Foreground="Red"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Visibility="Collapsed" />
+
+                        <Button
+                            Name="BtnConnect"
+                            Width="120"
+                            HorizontalAlignment="Right"
+                            Click="BtnConnect_Click"
+                            Content="{Binding 连接, Source={x:Static lang:MultiLang.Instance}}"
+                            Foreground="{StaticResource MaterialDesign.Brush.Secondary.Dark}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Visibility="{Binding SelectedDetail.Online, Converter={x:Static mconvt:BooleanToVisibilityConverter.NotCollapsedInstance}}" />
+                        <Button
+                            Name="BtnDisconnect"
+                            Grid.Column="2"
+                            Width="120"
+                            HorizontalAlignment="Right"
+                            Click="BtnDisconnect_Click"
+                            Command="{Binding SelectedDetail.DisConnectCommand, IsAsync=True}"
+                            Content="{Binding 取消连接, Source={x:Static lang:MultiLang.Instance}}"
+                            Foreground="Black"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Visibility="{Binding SelectedDetail.Online, Converter={x:Static mconvt:BooleanToVisibilityConverter.CollapsedInstance}}" />
+                    </StackPanel>
+                </Grid>
+            </Expander.Header>
+            <WrapPanel Margin="0,0,0,20">
+                <StackPanel
+                    Width="200"
+                    Margin="30,10,0,0"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <TextBlock Height="30" Text="{Binding 名称, Source={x:Static lang:MultiLang.Instance}}" />
+                    <TextBox
+                        Height="50"
+                        Padding="10,0,0,0"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding SelectedDetail.Name}" />
+                </StackPanel>
+                <StackPanel
+                    Width="200"
+                    Margin="30,10,0,0"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <TextBlock Height="30" Text="Sn: " />
+                    <TextBox
+                        Height="50"
+                        Padding="10,0,0,0"
+                        IsReadOnly="{Binding SelectedDetail.Online}"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding SelectedDetail.Sn, FallbackValue=DAQ_2601266666}" />
+                </StackPanel>
+                <StackPanel
+                    Width="200"
+                    Margin="30,10,0,0"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <TextBlock Height="30" Text="{Binding 账号, Source={x:Static lang:MultiLang.Instance}}" />
+                    <TextBox
+                        Height="50"
+                        Padding="10,0,0,0"
+                        IsReadOnly="{Binding SelectedDetail.Online}"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Text="{Binding SelectedDetail.Account}" />
+                </StackPanel>
+                <StackPanel
+                    Width="200"
+                    Margin="30,10,0,0"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical">
+                    <TextBlock Height="30" Text="{Binding 密码, Source={x:Static lang:MultiLang.Instance}}" />
+                    <PasswordBox
+                        Height="50"
+                        Padding="10,0,0,5"
+                        materialDesign:PasswordBoxAssist.Password="{Binding SelectedDetail.Password, Mode=TwoWay}"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        IsEnabled="{Binding SelectedDetail.Online, Converter={x:Static mconvt:InvertBooleanConverter.Instance}}"
+                        Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
+                </StackPanel>
+                <StackPanel
+                    Width="560"
+                    Margin="30,10,0,0"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+                    <StackPanel
+                        Width="100"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock Height="30" Text="{Binding 协议, Source={x:Static lang:MultiLang.Instance}}" />
+                        <TextBox
+                            Height="50"
+                            Padding="10,0,0,0"
+                            IsReadOnly="{Binding SelectedDetail.Online}"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding SelectedDetail.Protocol}" />
+                    </StackPanel>
+                    <StackPanel
+                        Width="300"
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock Height="30" Text="{Binding 地址, Source={x:Static lang:MultiLang.Instance}}" />
+                        <TextBox
+                            Height="50"
+                            Padding="10,0,0,0"
+                            IsReadOnly="{Binding SelectedDetail.Online}"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding SelectedDetail.Ip}" />
+                    </StackPanel>
+                    <StackPanel
+                        Width="100"
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock Height="30" Text="{Binding 端口, Source={x:Static lang:MultiLang.Instance}}" />
+                        <TextBox
+                            Height="50"
+                            Padding="10,0,0,0"
+                            IsReadOnly="{Binding SelectedDetail.Online}"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding SelectedDetail.Port}" />
+                    </StackPanel>
+                </StackPanel>
+            </WrapPanel>
+        </Expander>
+        <Grid Height="{Binding Height}" Margin="30,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="11" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="240" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="6" />
+            </Grid.RowDefinitions>
+            <Rectangle
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Margin="0,0,0,0"
+                Fill="DarkGray" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                Content="添加订阅"
+                Style="{StaticResource MaterialDesignOutlinedButton}" />
+            <Rectangle
+                Grid.Row="1"
+                Grid.RowSpan="5"
+                Grid.Column="1"
+                Margin="5,0,5,-5"
+                Fill="DarkGray" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="160"
+                HorizontalAlignment="Left"
+                Command="{Binding SelectedDetail.ClearContentCommand, IsAsync=True}"
+                Content="Clear Contents"
+                Style="{StaticResource MaterialDesignOutlinedButton}" />
+            <ListView
+                Grid.Row="2"
+                Grid.Column="0"
+                ItemTemplate="{StaticResource MqttTopicTemplate}"
+                ItemsSource="{Binding SelectedDetail.Topics}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectedItem="{Binding SelectedDetail.Topic}" />
+            <Border
+                Grid.Row="2"
+                Grid.RowSpan="3"
+                Grid.Column="2"
+                BorderBrush="DarkGray"
+                BorderThickness="1">
+                <ListView
+                    Name="LbContents"
+                    MinHeight="620"
+                    ItemTemplate="{StaticResource MqttContentTemplate}"
+                    ItemsSource="{Binding SelectedDetail.Contents}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    VirtualizingPanel.CacheLength="12"
+                    VirtualizingPanel.CacheLengthUnit="Item"
+                    VirtualizingPanel.IsContainerVirtualizable="True"
+                    VirtualizingPanel.IsVirtualizing="True"
+                    VirtualizingPanel.ScrollUnit="Item"
+                    VirtualizingPanel.VirtualizationMode="Recycling" />
+            </Border>
+            <DataGrid
+                Grid.Row="3"
+                Grid.Column="0"
+                materialDesign:DataGridAssist.CellPadding="4 2 2 2"
+                materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"
+                AutoGenerateColumns="False"
+                CanUserAddRows="True"
+                CanUserDeleteRows="True"
+                CanUserReorderColumns="False"
+                CanUserSortColumns="False"
+                HeadersVisibility="All"
+                IsEnabled="{Binding SelectedDetail.Online}"
+                ItemsSource="{Binding SelectedDetail.WritableDatas}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectedItem="{Binding SelectedDetail.SelectedData}"
+                SelectionMode="Single"
+                SelectionUnit="FullRow">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="60"
+                        Binding="{Binding Address}"
+                        Header="Address" />
+                    <DataGridTextColumn
+                        Width="70"
+                        Binding="{Binding Value}"
+                        Header="Value" />
+                    <DataGridTextColumn
+                        Width="70"
+                        Binding="{Binding StrValue}"
+                        Header="StrValue"
+                        IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <DockPanel
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="0,5,0,5">
+                <ComboBox
+                    Name="CbFunctionCode"
+                    Width="80"
+                    HorizontalAlignment="Left">
+                    <ComboBoxItem Content="1" />
+                    <ComboBoxItem Content="2" />
+                    <ComboBoxItem Content="3" IsSelected="True" />
+                    <ComboBoxItem Content="4" IsEnabled="False" />
+                </ComboBox>
+                <Button
+                    Width="36"
+                    Height="36"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding SelectedDetail.EditRegistersCommand, IsAsync=True}"
+                    CommandParameter="{Binding ElementName=CbFunctionCode, Path=SelectedIndex}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}">
+                    <materialDesign:PackIcon Kind="Send" />
+                </Button>
+            </DockPanel>
+            <Rectangle
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Margin="0,5,0,0"
+                Fill="DarkGray" />
+        </Grid>
+    </StackPanel>
+</UserControl>
