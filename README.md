@@ -27,3 +27,10 @@
 
 ## Simulation
 - Install Modbus Slave Simulation tool (ex: [Modbus Slave Simulation](https://github.com/GitHubDragonFly/ModbusSlaveSimulation))
+- Create Virtual Serial Port Pair
+- setup Modbus Rtu
+- Run Poseidon Ems.exe
+- Create Project and Setup options 
+- click 'local connect'
+- click Quickly Link which dock on top right position
+- open menu 'Device Topology'
